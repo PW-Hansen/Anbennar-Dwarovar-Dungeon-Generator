@@ -1,0 +1,285 @@
+l_english:
+ diggy_dungeons.101.t:0 "Beginning Floor 1"
+ diggy_dungeons.101.d:0 "Atrium"
+ diggy_dungeons.101.a:0 "Clear the webs (E)"
+ diggy_dungeons.101.b:0 "Open the door"
+
+ diggy_dungeons.102.t:0 "Beginning Floor 1: Clear the webs (E) - Success"
+ diggy_dungeons.102.d:0 "web begone"
+ diggy_dungeons.102.a:0 "+loot"
+
+ diggy_dungeons.103.t:0 "Beginning Floor 1: Clear the webs (E) - Failure"
+ diggy_dungeons.103.d:0 "attacked by spiders"
+ diggy_dungeons.103.a:0 "-manpower, -morale"
+
+ diggy_dungeons.104.t:0 "Reading Hall"
+ diggy_dungeons.104.d:0 "Riddle"
+ diggy_dungeons.104.a:0 "Destroy the statue (E)"
+ diggy_dungeons.104.b:0 "Turn the pedestal (M)"
+
+ diggy_dungeons.105.t:0 "Reading Hall: Destroy the statue (E) - Success"
+ diggy_dungeons.105.d.1:0 "passage opens"
+ diggy_dungeons.105.d.2:0 "passage opens"
+ diggy_dungeons.105.a:0 "+loot, +morale"
+
+ diggy_dungeons.106.t:0 "Reading Hall: Destroy the statue (E) - Failure"
+ diggy_dungeons.106.d.1:0 "got attacked, still open though"
+ diggy_dungeons.106.d.2:0 "got attacked, still open though"
+ diggy_dungeons.106.a:0 "-manpower, -morale"
+
+ diggy_dungeons.107.t:0 "Main Library"
+ diggy_dungeons.107.d:0 "Where do we<br>go next?"
+ diggy_dungeons.107.a:0 "Bookbinder"
+ diggy_dungeons.107.b:0 "Papermill"
+
+ diggy_dungeons.108.t:0 "Papermill"
+ diggy_dungeons.108.d:0 "kill the goblins"
+ diggy_dungeons.108.a:0 "Fight (E)"
+
+ diggy_dungeons.109.t:0 "Bookbinder"
+ diggy_dungeons.109.d:0 "kill the orcs"
+ diggy_dungeons.109.a:0 "Fight (M)"
+
+ diggy_dungeons.110.t:0 "Papermill: Fight (E) - Success"
+ diggy_dungeons.110.d.1:0 "2"
+ diggy_dungeons.110.d.2:0 "2"
+ diggy_dungeons.110.a:0 ""
+
+ diggy_dungeons.111.t:0 "Papermill: Fight (E) - Failure"
+ diggy_dungeons.111.d.1:0 "1"
+ diggy_dungeons.111.d.2:0 "1"
+ diggy_dungeons.111.a:0 ""
+
+ diggy_dungeons.112.t:0 "Bookbinder: Fight (M) - Success"
+ diggy_dungeons.112.d.1:0 "2"
+ diggy_dungeons.112.d.2:0 "2"
+ diggy_dungeons.112.a:0 ""
+
+ diggy_dungeons.113.t:0 "Bookbinder: Fight (M) - Failure"
+ diggy_dungeons.113.d.1:0 "1"
+ diggy_dungeons.113.d.2:0 "1"
+ diggy_dungeons.113.a:0 ""
+
+ diggy_dungeons.114.t:0 "Main Library"
+ diggy_dungeons.114.d:0 "Last Stand"
+ diggy_dungeons.114.a:0 "Fight (H)"
+
+ diggy_dungeons.115.t:0 "Emergency System"
+ diggy_dungeons.115.d:0 "Should we try?"
+ diggy_dungeons.115.a:0 "Yay"
+ diggy_dungeons.115.b:0 "Nay"
+
+ diggy_dungeons.116.t:0 "Main Library: Fight (H) - Failure"
+ diggy_dungeons.116.d:0 "there's to many"
+ diggy_dungeons.116.a:0 "next time"
+
+ diggy_dungeons.117.t:0 "Main Library: Fight (H) - Success"
+ diggy_dungeons.117.d:0 ""
+ diggy_dungeons.117.a:0 ""
+
+ diggy_dungeons.118.t:0 "Emergency System: Yay - Success"
+ diggy_dungeons.118.d.1:0 "2"
+ diggy_dungeons.118.d.2:0 "2"
+ diggy_dungeons.118.a:0 ""
+
+ diggy_dungeons.119.t:0 "Emergency System: Yay - Failure"
+ diggy_dungeons.119.d:0 "we wrecked the place completely"
+ diggy_dungeons.119.a:0 "this should be worse"
+
+ diggy_dungeons.120.t:0 "Emergency System: Nay - Failure"
+ diggy_dungeons.120.d:0 "we'll try again next time"
+ diggy_dungeons.120.a:0 ""
+
+ diggy_dungeons.121.t:0 "End Event"
+ diggy_dungeons.121.d:0 "We made it"
+ diggy_dungeons.121.a:0 "End expedition"
+
+ diggy_dungeons.122.t:0 "Beginning Floor 2"
+ diggy_dungeons.122.d:0 "open wall with enemies"
+ diggy_dungeons.122.a:0 "Fight (E)"
+
+ diggy_dungeons.123.t:0 "Beginning Floor 2: Fight (E) - Success"
+ diggy_dungeons.123.d:0 "goblins die"
+ diggy_dungeons.123.a:0 "-manpower, +loot"
+
+ diggy_dungeons.124.t:0 "Beginning Floor 2: Fight (E) - Failure"
+ diggy_dungeons.124.d:0 "We barely made it"
+ diggy_dungeons.124.a:0 "- -manpower, -morale"
+
+ diggy_dungeons.125.t:0 "Get Down"
+ diggy_dungeons.125.d:0 "How ?"
+ diggy_dungeons.125.a:0 "Secure the thing (M)"
+ diggy_dungeons.125.b:0 "Just rope down"
+
+ diggy_dungeons.126.t:0 "Get Down: Just rope down - Failure"
+ diggy_dungeons.126.d:0 "this was a terrible idea we crashed"
+ diggy_dungeons.126.a:0 "-manpower, -morale, -supplies"
+
+ diggy_dungeons.127.t:0 "Get Down: Secure the thing (M) - Failure"
+ diggy_dungeons.127.d:0 "oof"
+ diggy_dungeons.127.a:0 "-supplies"
+
+ diggy_dungeons.128.t:0 "Get Down: Secure the thing (M) - Success"
+ diggy_dungeons.128.d:0 "good work"
+ diggy_dungeons.128.a:0 "+morale"
+
+ diggy_dungeons.129.t:0 "Chasm 1"
+ diggy_dungeons.129.d:0 "kill more goblins"
+ diggy_dungeons.129.a:0 "Fight (M)"
+
+ diggy_dungeons.130.t:0 "Chasm 1: Fight (M) - Success"
+ diggy_dungeons.130.d:0 "you know it boy"
+ diggy_dungeons.130.a:0 "-manpower, + morale, +supplies"
+
+ diggy_dungeons.131.t:0 "Chasm 1: Fight (M) - Failure"
+ diggy_dungeons.131.d:0 "again?"
+ diggy_dungeons.131.a:0 "- -manpower, -morale"
+
+ diggy_dungeons.132.t:0 "Chasm 2"
+ diggy_dungeons.132.d:0 "kill the orcs"
+ diggy_dungeons.132.a:0 "Fight (M)"
+
+ diggy_dungeons.133.t:0 "Chasm 2: Fight (M) - Success"
+ diggy_dungeons.133.d:0 "lmao die"
+ diggy_dungeons.133.a:0 "-manpower, +loot"
+
+ diggy_dungeons.134.t:0 "Chasm 2: Fight (M) - Failure"
+ diggy_dungeons.134.d:0 "at least they dead"
+ diggy_dungeons.134.a:0 "- - -manpower"
+
+ diggy_dungeons.135.t:0 "Big Boss"
+ diggy_dungeons.135.d:0 "He large"
+ diggy_dungeons.135.a:0 "Make a Trap (H)"
+ diggy_dungeons.135.b:0 "Fight (M)"
+
+ diggy_dungeons.136.t:0 "Big Boss: Make a Trap (H) - Success"
+ diggy_dungeons.136.d:0 "rot down here"
+ diggy_dungeons.136.a:0 ""
+
+ diggy_dungeons.137.t:0 "Big Boss: Make a Trap (H) - Failure"
+ diggy_dungeons.137.d:0 "oh he saw us"
+ diggy_dungeons.137.a:0 "Fight (H)"
+
+ diggy_dungeons.138.t:0 "Big Boss: Fight (H) - Success"
+ diggy_dungeons.138.d:0 "die"
+ diggy_dungeons.138.a:0 "++loot, +morale"
+
+ diggy_dungeons.139.t:0 "Big Boss: Fight (H) - Failure"
+ diggy_dungeons.139.d:0 ""
+ diggy_dungeons.139.a:0 ""
+
+ diggy_dungeons.140.t:0 "Way Up"
+ diggy_dungeons.140.d:0 "Let's get this done"
+ diggy_dungeons.140.a:0 "Seal the wall"
+
+ diggy_dungeons.141.t:0 "End Event"
+ diggy_dungeons.141.d:0 "We made it"
+ diggy_dungeons.141.a:0 "End expedition"
+
+ diggy_dungeons.142.t:0 "Beginning Floor 3"
+ diggy_dungeons.142.d:0 "Main Library"
+ diggy_dungeons.142.a:0 "Follow the sound"
+ diggy_dungeons.142.b:0 "Barricade door (M)"
+
+ diggy_dungeons.143.t:0 "Collapsing Shelf"
+ diggy_dungeons.143.d:0 "It do be crashing"
+ diggy_dungeons.143.a:0 "Evade (M)"
+
+ diggy_dungeons.144.t:0 "Beginning Floor 3: Barricade door (M) - Failure"
+ diggy_dungeons.144.d:0 "Goblins"
+ diggy_dungeons.144.a:0 "Fight (M)"
+
+ diggy_dungeons.145.t:0 "Beginning Floor 3: Barricade door (M) - Success"
+ diggy_dungeons.145.d:0 "<font style="font-size: 11px;">no one getting through, and other path has loot</font>"
+ diggy_dungeons.145.a:0 "+++loot"
+
+ diggy_dungeons.146.t:0 "Collapsing Shelf: Evade (M) - Failure"
+ diggy_dungeons.146.d:0 "clunk clonk bonk"
+ diggy_dungeons.146.a:0 "-manpower, -morale"
+
+ diggy_dungeons.147.t:0 "Collapsing Shelf: Evade (M) - Success"
+ diggy_dungeons.147.d:0 "nothing hit us"
+ diggy_dungeons.147.a:0 "+morale"
+
+ diggy_dungeons.148.t:0 "Beginning Floor 3: Barricade door (M) - Failure: Fight (M) - Success"
+ diggy_dungeons.148.d:0 "goblins die"
+ diggy_dungeons.148.a:0 "-manpower, +loot"
+
+ diggy_dungeons.149.t:0 "Beginning Floor 3: Barricade door (M) - Failure: Fight (M) - Failure"
+ diggy_dungeons.149.d:0 "We barely made it"
+ diggy_dungeons.149.a:0 "- -manpower, -morale"
+
+ diggy_dungeons.150.t:0 "Scribe Room"
+ diggy_dungeons.150.d:0 "Animated Books"
+ diggy_dungeons.150.a:0 "Fight (H)"
+ diggy_dungeons.150.b:0 "Try to catch (M)"
+
+ diggy_dungeons.151.t:0 "Scribe Room: Fight (H) - Failure"
+ diggy_dungeons.151.d:0 "debat'd"
+ diggy_dungeons.151.a:0 "-morale, -discipline"
+
+ diggy_dungeons.152.t:0 "Scribe Room: Fight (H) - Success"
+ diggy_dungeons.152.d:0 "The Sword is stronger than the book"
+ diggy_dungeons.152.a:0 "+morale"
+
+ diggy_dungeons.153.t:0 "Scribe Room: Try to catch (M) - Success"
+ diggy_dungeons.153.d:0 "read them"
+ diggy_dungeons.153.a:0 "+discipline"
+
+ diggy_dungeons.154.t:0 "Scribe Room: Try to catch (M) - Failure"
+ diggy_dungeons.154.d:0 "where are they?"
+ diggy_dungeons.154.a:0 "-morale"
+
+ diggy_dungeons.155.t:0 "Gold Room"
+ diggy_dungeons.155.d:0 "so much loot i sure hope this goes well&nbsp;"
+ diggy_dungeons.155.a:0 "try to calm down (M)"
+
+ diggy_dungeons.156.t:0 "Room Somewhere"
+ diggy_dungeons.156.d:0 "where the F are we?"
+ diggy_dungeons.156.a:0 "Search Closely"
+ diggy_dungeons.156.b:0 "Continue"
+
+ diggy_dungeons.157.t:0 "Gold Room: try to calm down (M) - Failure"
+ diggy_dungeons.157.d:0 "people really fight each other hard"
+ diggy_dungeons.157.a:0 "-manpower, -morale,<br>&nbsp;- -discipline"
+
+ diggy_dungeons.158.t:0 "Gold Room: try to calm down (M) - Success"
+ diggy_dungeons.158.d:0 "people fight over gold"
+ diggy_dungeons.158.a:0 "+++loot, +morale, -disciplie"
+
+ diggy_dungeons.159.t:0 "Knowledge Elemental"
+ diggy_dungeons.159.d:0 "it hits us with philosophy (of fighting)"
+ diggy_dungeons.159.a:0 "Fight (H)"
+
+ diggy_dungeons.160.t:0 "Room Somewhere: Search Closely - Success"
+ diggy_dungeons.160.d:0 "There's old books"
+ diggy_dungeons.160.a:0 "+ADK"
+
+ diggy_dungeons.161.t:0 "Room Somewhere: Search Closely - Failure"
+ diggy_dungeons.161.d:0 "there's nothing here"
+ diggy_dungeons.161.a:0 "-morale"
+
+ diggy_dungeons.162.t:0 "Knowledge Elemental: Fight (H) - Success"
+ diggy_dungeons.162.d:0 "knaaawledge"
+ diggy_dungeons.162.a:0 "-manpower, +loot"
+
+ diggy_dungeons.163.t:0 "Knowledge Elemental: Fight (H) - Failure"
+ diggy_dungeons.163.d:0 "no-ledge"
+ diggy_dungeons.163.a:0 "- -manpower, -morale"
+
+ diggy_dungeons.164.t:0 "Living Spell"
+ diggy_dungeons.164.d:0 "Root of all evil"
+ diggy_dungeons.164.a:0 "Fight (H)"
+
+ diggy_dungeons.165.t:0 "Living Spell: Fight (H) - Success"
+ diggy_dungeons.165.d:0 "Yippie!"
+ diggy_dungeons.165.a:0 "+ADK, ++loot"
+
+ diggy_dungeons.166.t:0 "Living Spell: Fight (H) - Failure"
+ diggy_dungeons.166.d:0 ""
+ diggy_dungeons.166.a:0 ""
+
+ diggy_dungeons.167.t:0 "End Event"
+ diggy_dungeons.167.d:0 "We made it"
+ diggy_dungeons.167.a:0 "End expedition"
+
