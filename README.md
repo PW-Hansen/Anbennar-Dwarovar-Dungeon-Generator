@@ -1,4 +1,4 @@
-## XML converter v1.0
+## XML converter v1.1
 Takes in the (uncompressed) XML output of a draw.io diagram for a Dwarovar Dungeon and generates (most of) the event code, as well as a localization file for the generated events.
 
 One such XML output can be found in the examples folder, along with a PNG of the corresponding diagram. Credit to Thurinsen for these.
@@ -9,6 +9,8 @@ The following should be adhered to when creating the draw.io diagram:
 * Make sure that all arrows originate from an option and end at the head/title of an event, and that it is attached to one of the connection points for the latter.
 * Stick to the standards laid out in the example: Green for success, red for failure (with the title "Game Over" if it should result in a premature end of the dungeon expedition), orange-ish for successfully completing the floor, and so on.
 * Options with a success/fail outcomes should have either "(E)", "(M)", or "(H)" at the end to denote difficulty, currently corresponding to a base success chance of 80%, 60%, and 40% respectively. Alternatively, a base success chance can be set by ending the option text with "(X)", where X is an integer. If no parenthesis is present, the script will set the base success chance to easy.
+* All events must have at least one option which does not require supplies.
+* Options with a success outcome must have a second outcome as well.
 
 # Script usage
 * Run the script.

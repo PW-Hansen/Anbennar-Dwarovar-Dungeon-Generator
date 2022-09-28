@@ -4,6 +4,10 @@ import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 import os
 
+#%% TODO
+# Screen for bad arrows, make sure they have both source and target.
+# When adding event components, check to make sure title is right and such?
+
 #%% Defines.
 # Base structure of an event.
 EVENT_BASE = '''
@@ -17,7 +21,7 @@ desc_placeholder
 	is_triggered_only = yes
 	
 	trigger = {
-		always = yes
+		has_province_flag = sent_expedition_@owner
 	}
 options_placeholder
 }
@@ -55,8 +59,8 @@ PARTY_BASE_CHANGE_ADD = '\t\tchange_party_stat = { add_tooltip = yes add = value
 PARTY_DEFAULT_DELTA = { 
     'loot': 100,
     'morale': 0.5,
-    'manpower': 100,
-    'supplies': 5, 
+    'manpower': 200,
+    'supplies': 4, 
     'effectiveness': 5    
 }
 
@@ -84,6 +88,35 @@ GAME_OVER_STRING = '''
 
 # Supplies.
 SUPPLIES_CHECK = 'check_variable = { partySupplies = value }'
+
+# Initial event string.
+START_EVENT_STRING = '''
+# Misc event presenting what the dungeons is
+province_event = {
+    id = diggy_dungeons.event_ID
+    title = diggy_dungeons.event_ID.t
+    desc = diggy_dungeons.event_ID.d
+    picture = CAVE_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        always = yes
+    }
+    
+    immediate = {
+    }
+    
+    after = {
+    }
+    
+    # Nice
+    option = {
+        name = diggy_dungeons.event_ID.a
+        ai_chance = { factor = 100 }
+    }
+}
+'''
 
 # End event string.
 END_EVENT_STRING = '''
@@ -145,16 +178,17 @@ SUCCESS_CHANCE = {
 
 #%% Classes for the dungeon structure.
 class Dungeon:
-    def __init__(self, name, XML_string, ID_start: int, party_statistics_delta):
+    def __init__(self, name, XML_string, ID_start: int, party_statistics_delta, debug = False):
         self.XML_string = XML_string
         self.name = name
         self.ID_start = ID_start
         self.party_statistics_delta = party_statistics_delta
         
-        self.get_elements()
-        self.get_events()
-        self.get_floors()
-        self.error_check()
+        if not debug:
+            self.get_elements()
+            self.get_events()
+            self.get_floors()
+            self.error_check()
         
     def __repr__(self):
         return f'{type(self).__name__}: {self.name}'
@@ -180,11 +214,14 @@ class Dungeon:
             keys = element.keys()
             attribs = element.attrib
             if 'style' in keys:
-                if attribs['style'] == 'group':
+                if 'group' in attribs['style']: # Not = 'group' due to some groups being rotated.
                     events_dict[attribs['id']] = Event(element, self)
                 elif attribs['parent'] in events_dict:
                     events_dict[attribs['parent']].add_component(element)
                     events_components[attribs['id']] = events_dict[attribs['parent']]
+        for element in self.elements:
+            keys = element.keys()
+            attribs = element.attrib
             if 'target' in keys:
                 source_opt      = attribs['source']
                 source_event    = events_components[source_opt]
@@ -222,8 +259,8 @@ class Dungeon:
     def floor_set_event_ID(self, debug = False):
         floor_events = [self.top_event]
         for event in floor_events:
-            event.event_ID = self.event_IDs
             self.event_IDs += 1
+            event.event_ID = self.event_IDs
             for connection_out in event.connections_out:
                 if not hasattr(connection_out, 'event_ID'):
                     connection_out.event_ID = self.event_IDs
@@ -232,8 +269,9 @@ class Dungeon:
         if debug:
             print(floor_events)                
         
-        self.level += 1
-        self.floors.append(Floor(self,self.level,floor_events))    
+        if len(floor_events) > 0:
+            self.level += 1
+            self.floors.append(Floor(self,self.level,floor_events))    
 
     # Some possible issues.
     def error_check(self):
@@ -255,13 +293,17 @@ class Dungeon:
                 
     # Writes to output files.
     def write_to_file(self,file_name):
-        with open(f'{file_name}.txt', 'w') as file:
+        with open(f'{file_name}.txt', 'a') as file:
+            file.write(START_EVENT_STRING.replace('event_ID', str(self.ID_start)))
             for floor in self.floors:
                 file.write(f'# {str(floor)}')
                 for event in floor.events:
                     event.write_event(file)
-        with open(f'{file_name}.yml', 'w') as file:
+        with open(f'{file_name}.yml', 'a') as file:
             file.write('l_english:\n')
+            file.write(f' diggy_dungeons.{self.ID_start}.t:0 ""')
+            file.write(f' diggy_dungeons.{self.ID_start}.d:0 ""')
+            file.write(f' diggy_dungeons.{self.ID_start}.a:0 ""')
             for floor in self.floors:
                 for event in floor.events:
                     for component in event.components:
@@ -438,6 +480,7 @@ class Option(EventComponent):
         loc_string = loc_string.replace('Text', self.text)
         
         file.write(loc_string)
+        
     # Generates the event code for an option.
     def write_option(self):
         party_statistics_delta = self.parent.dungeon.party_statistics_delta
@@ -503,8 +546,15 @@ class Option(EventComponent):
             progress_ID = self.outcomes[0].event_ID
             effect_string += PROGRESS_BASE.replace('progress_ID', str(progress_ID))
         
-        # Encounter effect for when an option has a success and fail outcome.
+        # Encounter effect for when an option has a success outcome.
         if hasattr(self,'success'):
+            # Check if there is a success event but no failure event. If so, try to find another
+            # event outcome, and assign that as the failure event.
+            if not hasattr(self,'failure'):
+                for event in self.outcomes:
+                    if event.type != 'Success':
+                        self.failure = event
+
             effect_string += ENCOUNTER_EFFECT_BASE.replace('success_chance', str(self.base_succes))\
                                                   .replace('success_target', str(self.success.event_ID))\
                                                   .replace('failure_chance', str(100 - self.base_succes))\
@@ -574,7 +624,7 @@ class App(tk.Frame):
         self.dungeon_name.pack(side='top', pady=5)
 
         self.start_ID_label = tk.Label(self)
-        self.start_ID_label['text'] = 'Starting ID (should be 101, 201, or such)'
+        self.start_ID_label['text'] = 'Starting ID (should be 100, 200, or such)'
         self.start_ID_label['wraplength'] = 250
         self.start_ID_label.pack(side='top', pady=5)
         self.start_ID = tk.Entry(self)
@@ -660,6 +710,7 @@ class App(tk.Frame):
         try:
             dungeon = Dungeon(self.dungeon_name.get(), self.drawio_data.get(1.0, tk.END), 
                               int(self.start_ID.get()), self.party_statistics_delta)
+            print('Dungeon files generated.')
             os.makedirs("output", exist_ok=True)
             output_name = self.output_name.get().replace(' ','_')
             dungeon.write_to_file(f'output/{output_name}')
@@ -668,7 +719,7 @@ class App(tk.Frame):
 
         except:
             self.output_text.set(
-                "Something went wrong")
+                "Something went wrong. Please consult Magnive.")
             
             
 root = tk.Tk()
