@@ -57,7 +57,7 @@ PARTY_BASE_CHANGE_ADD = '\t\tchange_party_stat = { add_tooltip = yes add = value
 
 # Party attributes and their default change values.
 PARTY_DEFAULT_DELTA = { 
-    'loot': 100,
+    'loot': 75,
     'morale': 0.5,
     'manpower': 200,
     'supplies': 4, 
@@ -66,6 +66,9 @@ PARTY_DEFAULT_DELTA = {
 
 # Changing a variable value
 VARIABLE_CHANGE_BASE = '\t\tchange_variable = { which = variable_name value = value_change}\n'
+
+# ADK effect
+ADK_EFFECT = '\t\tadd_adk_effect = { add = value_change }'
 
 # Dungeon progress.
 PROGRESS_BASE = '\n\t\tdungeon_progress_advancement = { id = progress_ID }'
@@ -294,6 +297,7 @@ class Dungeon:
     # Writes to output files.
     def write_to_file(self,file_name):
         with open(f'{file_name}.txt', 'a') as file:
+            file.write(f'Dungeon: {self.name}\n')            
             file.write(START_EVENT_STRING.replace('event_ID', str(self.ID_start)))
             for floor in self.floors:
                 file.write(f'# {str(floor)}')
@@ -301,9 +305,10 @@ class Dungeon:
                     event.write_event(file)
         with open(f'{file_name}.yml', 'a') as file:
             file.write('l_english:\n')
-            file.write(f' diggy_dungeons.{self.ID_start}.t:0 ""')
-            file.write(f' diggy_dungeons.{self.ID_start}.d:0 ""')
-            file.write(f' diggy_dungeons.{self.ID_start}.a:0 ""')
+            file.write(f' diggy_dungeons.{self.ID_start}.t:0 ""\n')
+            file.write(f' diggy_dungeons.{self.ID_start}.d:0 ""\n')
+            file.write(f' diggy_dungeons.{self.ID_start}.a:0 ""\n')
+            file.write('\n')
             for floor in self.floors:
                 for event in floor.events:
                     for component in event.components:
@@ -526,6 +531,11 @@ class Option(EventComponent):
             # Default party statistics.
             if fragment_string in party_statistics_delta:
                 value = party_statistics_delta[fragment_string] * abs(delta)
+                
+                # Ensures that integer values are represented as such.
+                if value == int(value):
+                    value = int(value)
+                
                 change_string = PARTY_BASE_CHANGE_ADD.replace('stat', fragment_string)\
                                                      .replace('value', str(value))
                 
@@ -538,8 +548,7 @@ class Option(EventComponent):
                 effect_string += change_string
             # Alternative effects.
             elif fragment_string in ['ADK']:
-                effect_string += VARIABLE_CHANGE_BASE.replace('variable_name','ancientDwarvenKnowledge')\
-                                                     .replace('value_change', str(delta))
+                effect_string += ADK_EFFECT.replace('value_change', str(delta))
                     
         # Dungeon progress.
         if len(self.outcomes) == 1:
