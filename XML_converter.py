@@ -13,16 +13,16 @@ import os
 EVENT_BASE = '''
 # event_name
 province_event = {
-	id = diggy_dungeons.event_ID
-	title = diggy_dungeons.event_ID.t
+\tid = diggy_dungeons.event_ID
+\ttitle = diggy_dungeons.event_ID.t
 desc_placeholder
-	picture = TRADEGOODS_eventPicture
+\tpicture = TRADEGOODS_eventPicture
 	
-	is_triggered_only = yes
+\tis_triggered_only = yes
 	
-	trigger = {
-		has_province_flag = sent_expedition_@owner
-	}
+\ttrigger = {
+\t\thas_province_flag = sent_expedition_@owner
+\t}
 options_placeholder
 }
 '''
@@ -32,28 +32,28 @@ DESC_SINGLE = '\tdesc = diggy_dungeons.event_ID.d'
 
 # Desc multiple.
 DESC_MULTIPLE = '''\tdesc = {
-		trigger = { always = yes }
-		desc = diggy_dungeons.event_ID.d.1
-	}
-	desc = {
-		trigger = { always = no }
-		desc = diggy_dungeons.event_ID.d.2
-	}
+\t\ttrigger = { always = yes }
+\t\tdesc = diggy_dungeons.event_ID.d.1
+\t}
+\tdesc = {
+\t\ttrigger = { always = no }
+\t\tdesc = diggy_dungeons.event_ID.d.2
+\t}
 '''
 
 # Base structure of an option.
 OPTION_BASE = '''
-	option = {
-		name = diggy_dungeons.event_ID.option_ID
-		ai_chance = { factor = 100 }
-		trigger = {
-			always = yes
-		}
+\toption = {
+\t\tname = diggy_dungeons.event_ID.option_ID
+\t\tai_chance = { factor = 100 }
+\t\ttrigger = {
+\t\t\talways = yes
+\t\t}
 event_effects
-	}'''
+\t}'''
 
 # Base structure of party statistics change.
-PARTY_BASE_CHANGE_ADD = '\t\tchange_party_stat = { add_tooltip = yes add = value}\n'
+PARTY_BASE_CHANGE_ADD = '\t\tchange_party_stat = { add_tooltip = yes add = value }\n'
 
 # Party attributes and their default change values.
 PARTY_DEFAULT_DELTA = { 
@@ -61,27 +61,28 @@ PARTY_DEFAULT_DELTA = {
     'morale': 0.5,
     'manpower': 200,
     'supplies': 4, 
-    'effectiveness': 5    
+    'effectiveness': 5,    
+    'party_rewards': 50
 }
 
 # Changing a variable value
-VARIABLE_CHANGE_BASE = '\t\tchange_variable = { which = variable_name value = value_change}\n'
+VARIABLE_CHANGE_BASE = '\t\tchange_variable = { which = variable_name value = value_change }\n'
 
 # ADK effect
-ADK_EFFECT = '\t\tadd_adk_effect = { add = value_change }'
+ADK_EFFECT = '\t\tadd_adk_effect = { add = value_change }\n'
 
 # Dungeon progress.
-PROGRESS_BASE = '\n\t\tdungeon_progress_advancement = { id = progress_ID }'
+PROGRESS_BASE = '\n\t\tdungeon_progress_advancement = { id = progress_ID } # #&progress_ID'
 
 # Encounter effect.
 ENCOUNTER_EFFECT_BASE = '''		
-        dungeon_encounter_effect = {
-			base_success = success_chance
-			success_id = success_target
+\t\tdungeon_encounter_effect = {
+\t\t\tbase_success = success_chance
+\t\t\tsuccess_id = success_target # #&success_target
 			
-			base_failure = failure_chance
-			failure_id = failure_target
-		}'''
+\t\t\tbase_failure = failure_chance
+\t\t\tfailure_id = failure_target # #&failure_target
+\t\t}'''
 
 # Game over string.
 GAME_OVER_STRING = '''
@@ -96,64 +97,63 @@ SUPPLIES_CHECK = 'check_variable = { partySupplies = value }'
 START_EVENT_STRING = '''
 # Misc event presenting what the dungeons is
 province_event = {
-    id = diggy_dungeons.event_ID
-    title = diggy_dungeons.event_ID.t
-    desc = diggy_dungeons.event_ID.d
-    picture = CAVE_eventPicture
+\tid = diggy_dungeons.event_ID
+\ttitle = diggy_dungeons.event_ID.t
+\tdesc = diggy_dungeons.event_ID.d
+\tpicture = CAVE_eventPicture
     
-    is_triggered_only = yes
+\tis_triggered_only = yes
     
-    trigger = {
-        always = yes
-    }
+\ttrigger = {
+\t\talways = yes
+\t}
     
-    immediate = {
-    }
+\timmediate = {
+\t}
     
-    after = {
-    }
+\tafter = {
+\t}
     
-    # Nice
-    option = {
-        name = diggy_dungeons.event_ID.a
-        ai_chance = { factor = 100 }
-    }
+\t# Nice
+\toption = {
+\t\tname = diggy_dungeons.event_ID.a
+\t\tai_chance = { factor = 100 }
+\t}
 }
 '''
 
 # End event string.
 END_EVENT_STRING = '''
-    immediate = {
-        dungeon_immediate_effect = yes
-    }
+\timmediate = {
+\t\tdungeon_immediate_effect = yes
+\t}
 
-    option = {
-        name = diggy_dungeons.event_ID.a
-        ai_chance = { factor = 100 }
-        trigger = {
-            always = yes
-        }
-        special_reward_expedition = yes
-        currency_effect_expedition = {  currency = treasury cash = yes addTo = owner }
-        currency_effect_expedition = {  currency = adm_power mana = yes addTo = owner }
-        currency_effect_expedition = {  currency = dip_power mana = yes addTo = owner }
-        currency_effect_expedition = {  currency = mil_power mana = yes addTo = owner }
-        hidden_effect = {
-            while = {
-                limit = { check_variable = { partyManpower = 1000 } }
-                subtract_variable = { partyManpower = 1000 }
-                owner = { add_manpower = 1 }
-            }
-        }
-        custom_tooltip = back_to_manpower_tooltip
-        custom_tooltip = base_expedition_loot_tooltip
-        if = {
-            limit = { check_variable = { ancientDwarvenKnowledge = 1 } }
-            province_event = { id = diggy_expedition.14 }
-        }
-        else = { hidden_effect = { clear_expedition_effect = yes } }
-        hidden_effect = { set_province_flag = floor_explored }
-    }
+\toption = {
+\t\tname = diggy_dungeons.event_ID.a
+\t\tai_chance = { factor = 100 }
+\t\ttrigger = {
+\t\t    always = yes
+\t\t}
+\t\tspecial_reward_expedition = yes
+\t\tcurrency_effect_expedition = {  currency = treasury cash = yes addTo = owner }
+\t\tcurrency_effect_expedition = {  currency = adm_power mana = yes addTo = owner }
+\t\tcurrency_effect_expedition = {  currency = dip_power mana = yes addTo = owner }
+\t\tcurrency_effect_expedition = {  currency = mil_power mana = yes addTo = owner }
+\t\thidden_effect = {
+\t\t\twhile = {
+\t\t\t\tlimit = { check_variable = { partyManpower = 1000 } }
+\t\t\t\tsubtract_variable = { partyManpower = 1000 }
+\t\t\t\towner = { add_manpower = 1 }
+\t\t\t}
+\t\t}
+\t\tcustom_tooltip = back_to_manpower_tooltip
+\t\tcustom_tooltip = base_expedition_loot_tooltip
+\t\tif = {
+\t\t\tlimit = { check_variable = { ancientDwarvenKnowledge = 1 } }
+\t\t\tprovince_event = { id = diggy_expedition.14 }
+\t\t}
+\t\telse = { hidden_effect = { clear_expedition_effect = yes } }
+\t\thidden_effect = { set_province_flag = floor_explored }\t}
 '''
 
 # Localization structure.
@@ -161,6 +161,7 @@ LOCALIZATION_BASE = ' diggy_dungeons.event_ID.loc_ID:0 "Text"\n'
 
 
 # Hex color identities.
+HEX_COLORS_LIST = ['#e1d5e7', '#d5e8d4', '#f8cecc', '#ffe6cc']
 HEX_COLORS_DICT = {
     '#e1d5e7': 'Room',
     '#d5e8d4': 'Success',
@@ -186,12 +187,15 @@ class Dungeon:
         self.name = name
         self.ID_start = ID_start
         self.party_statistics_delta = party_statistics_delta
+        self.debug = debug
         
         if not debug:
             self.get_elements()
             self.get_events()
             self.get_floors()
+            self.event_ID_dictionary()
             self.error_check()
+            
         
     def __repr__(self):
         return f'{type(self).__name__}: {self.name}'
@@ -201,39 +205,52 @@ class Dungeon:
         tree = ET.ElementTree(ET.fromstring(self.XML_string))
         root = tree.getroot()
         self.elements = [root[0][0][0][i] for i in range(len(root[0][0][0]))]
+        self.sub_elements = [0] * len(self.elements)
+        for i in range(len(root[0][0][0])):
+            try:
+                self.sub_elements[i] = root[0][0][0][i][0]
+            except:
+                pass
+        
     
     # Extracts the events from the elements.
     def get_events(self):
-        events_dict = {}
-        events_components = {}
+        self.events_dict = {}
+        self.events_components = {}
         
         # Loops through each element and picks out elements which is a group, 
         # in which case it established as an event object and saved in a 
         # dictionary, or is a child of an event, in which case it is added to
         # that event as a  component.
-        # Furthermore, checks whether an element is an arrow. If so, establish
-        # a connection between the target and the source.
-        for element in self.elements:
+        for element,sub_element in zip(self.elements, self.sub_elements):
             keys = element.keys()
             attribs = element.attrib
             if 'style' in keys:
-                if 'group' in attribs['style']: # Not = 'group' due to some groups being rotated.
-                    events_dict[attribs['id']] = Event(element, self)
-                elif attribs['parent'] in events_dict:
-                    events_dict[attribs['parent']].add_component(element)
-                    events_components[attribs['id']] = events_dict[attribs['parent']]
+                if 'group' in attribs['style']: # Not = 'group' due to some groups being rotated. Somehow.
+                    self.events_dict[attribs['id']] = Event(element, sub_element, self)
+                elif attribs['parent'] in self.events_dict and 'source' not in keys:
+                    self.events_dict[attribs['parent']].add_component(element, sub_element)
+                    self.events_components[attribs['id']] = self.events_dict[attribs['parent']]
+                    
+        
+        # Check whether an element is an arrow. If so, establish a
+        # connection between the target and the source. 
         for element in self.elements:
             keys = element.keys()
             attribs = element.attrib
-            if 'target' in keys:
-                source_opt      = attribs['source']
-                source_event    = events_components[source_opt]
-                target          = events_components[attribs['target']]
-                
-                source_event.add_connection(source_opt,target)
+            if 'source' in keys:
+                # Print an error message if the arrow has no target.
+                if 'target' not in keys:
+                    print('Issue with arrow %s.' % attribs['id'])
+                else:
+                    source_opt      = attribs['source']
+                    source_event    = self.events_components[source_opt]
+                    target          = self.events_components[attribs['target']]
+                    
+                    source_event.add_connection(source_opt,target)
     
         # Saves the events to the dungeon class.
-        self.events = [v for k,v in events_dict.items()]
+        self.events = [v for k,v in self.events_dict.items()]
         
     # Splits the events into floors.
     def get_floors(self):
@@ -242,32 +259,47 @@ class Dungeon:
         self.event_IDs = self.ID_start
 
         for event in self.events:
-            if not hasattr(event, 'event_ID'):
+            if not hasattr(event, 'is_in_floor'):
                 self.top_event = event
                 self.floor_set_top_event()
-                self.floor_set_event_ID(debug = False)
+                self.floor_get_events()
+        
+        # Makes sure that the floors are in correct order.
+        self.floors_order()
+                
+        for floor in self.floors:
+            self.floor_set_IDs(floor)
 
     # Looks for incoming connections to an event. If there is at least one, go
     # to the first incoming connection and repeat the process.
     def floor_set_top_event(self):
         while len(self.top_event.connections_in) > 0:
             self.top_event = self.top_event.connections_in[0]
-
-    # When supplies with a top event of a floor, assigns that event a
-    # specified ID, then increments the ID, accesses the children of said
-    # event, gives them ID, and adds their outgoing connections, and so on, 
-    # until all events in a floor have been assigned an ID.
-    # During this process, all events connected to the top event are saved in
-    # a list for the floor object.
-    def floor_set_event_ID(self, debug = False):
+    
+    def floors_order(self):
+        if len(self.floors) != 3:
+            print('Dungeon does not have 3 floors. Something went wrong.')
+        else:
+            x_pos = [int(self.floors[i].events[0].xml_sub_element.attrib['x']) for i in range(3)]
+            while x_pos[0] > x_pos[1]:
+                x_pos[0], x_pos[1] = x_pos[1], x_pos[0]
+                self.floors[0], self.floors[1] = self.floors[1], self.floors[0]
+                while x_pos[1] > x_pos[2]:
+                    x_pos[1], x_pos[2] = x_pos[2], x_pos[1]
+                    self.floors[1], self.floors[2] = self.floors[2], self.floors[2]
+            self.floors[0].level = 1
+            self.floors[1].level = 2
+            self.floors[2].level = 3
+    
+    # Gets all events flowing from a top event.
+    def floor_get_events(self, debug = False):
         floor_events = [self.top_event]
+        self.top_event.is_in_floor = True
         for event in floor_events:
-            self.event_IDs += 1
-            event.event_ID = self.event_IDs
             for connection_out in event.connections_out:
-                if not hasattr(connection_out, 'event_ID'):
-                    connection_out.event_ID = self.event_IDs
+                if connection_out not in floor_events:
                     floor_events.append(connection_out)
+                    connection_out.is_in_floor = True
             
         if debug:
             print(floor_events)                
@@ -275,6 +307,18 @@ class Dungeon:
         if len(floor_events) > 0:
             self.level += 1
             self.floors.append(Floor(self,self.level,floor_events))    
+
+    # Assigns event IDs to all events in a floor.
+    def floor_set_IDs(self, floor):
+        for event in floor.events:
+            self.event_IDs += 1
+            event.event_ID = self.event_IDs
+            
+
+    def event_ID_dictionary(self):
+        self.event_ID_dict = {}
+        for event in self.events:
+            self.event_ID_dict[event.event_ID] = event
 
     # Some possible issues.
     def error_check(self):
@@ -296,14 +340,35 @@ class Dungeon:
                 
     # Writes to output files.
     def write_to_file(self,file_name):
-        with open(f'{file_name}.txt', 'a') as file:
+        # Event file.
+        with open(f'{file_name}.txt', 'w') as file:
             file.write(f'Dungeon: {self.name}\n')            
             file.write(START_EVENT_STRING.replace('event_ID', str(self.ID_start)))
             for floor in self.floors:
                 file.write(f'# {str(floor)}')
                 for event in floor.events:
-                    event.write_event(file)
-        with open(f'{file_name}.yml', 'a') as file:
+                    event.write_event(file)     
+
+        # Kinda stupid but easy way to get rid of .0s in the event file, which 
+        # cause issues in the game for some reason.
+        with open(f'{file_name}.txt', 'r') as file:
+            lines = file.readlines()
+        with open(f'{file_name}.txt', 'w') as file:
+            for line in lines:
+                line = line.replace(".0", "")
+                
+                # Also adds in names for events.
+                if '#&' in line:
+                    event_ID = int(line.split('#&')[1].strip())
+                    event_name = str(self.event_ID_dict[event_ID])
+                    line = line.replace(f'#&{event_ID}',event_name)
+
+                file.write(line)
+                    
+                    
+        
+        # Localization file.
+        with open(f'{file_name}.yml', 'w') as file:
             file.write('l_english:\n')
             file.write(f' diggy_dungeons.{self.ID_start}.t:0 ""\n')
             file.write(f' diggy_dungeons.{self.ID_start}.d:0 ""\n')
@@ -311,8 +376,10 @@ class Dungeon:
             file.write('\n')
             for floor in self.floors:
                 for event in floor.events:
-                    for component in event.components:
-                        component.write_loc(file)
+                    event.title.write_loc(file)
+                    event.desc.write_loc(file)
+                    for option in event.options:
+                        option.write_loc(file)
                     file.write('\n')
 
 # Floor class, mostly serving as a container for the events within it.
@@ -326,8 +393,9 @@ class Floor:
         return f'{self.parent.name} floor {self.level}'
 
 class Event:
-    def __init__(self, xml_element, dungeon):
+    def __init__(self, xml_element, xml_sub_element, dungeon):
         self.xml_element = xml_element
+        self.xml_sub_element = xml_sub_element
         self.dungeon = dungeon
         self.ID = xml_element.attrib['id']
         self.title = None
@@ -346,13 +414,24 @@ class Event:
         else:
             return f'{self.ID}'
         
-    def add_component(self,xml_element):
-        if self.title == None:
-            self.title = Title(xml_element, self)
-        elif self.desc == None:
-            self.desc = Desc(xml_element, self)
+    def add_component(self,xml_element, xml_sub_element):
+        component_width = int(xml_sub_element.attrib['width'])
+        
+        # If the width is 100, the component is a description.
+        if component_width == 100:
+            self.desc = Desc(xml_element, xml_sub_element, self)
+
+        # Otherwise it should be 120.
+        elif component_width == 120:
+            # Checks whether the subelement has a y value. If so, it's an option.
+            if 'y' in xml_sub_element.attrib:
+                self.options.append(Option(xml_element, xml_sub_element, self))                
+            else:
+                self.title = Title(xml_element, xml_sub_element, self)
+
+        # Something has gone wrong it it's not one of those two.
         else:
-            self.options.append(Option(xml_element, self))
+            print(f'Error at {xml_element}.')
 
     # Adds connections between events, as well as for the option leading to 
     # the target event. If an option leads to Success and Failure events, then
@@ -396,8 +475,9 @@ class Event:
         file.write(self.event_string)
 
 class EventComponent:
-    def __init__(self, xml_element, parent):
+    def __init__(self, xml_element, xml_sub_element, parent):
         self.xml_element = xml_element
+        self.xml_sub_element = xml_sub_element
         self.ID = xml_element.attrib['id']
         self.text = xml_element.attrib['value']
         self.parent = parent
@@ -469,11 +549,15 @@ class Option(EventComponent):
     # raw number.
     def get_difficulty(self):
         if '(' in self.text:
-            self.difficulty = self.text.split('(')[1].strip(')')
+            self.difficulty = self.text.split('(')[1].split(')')[0]
             if self.difficulty in SUCCESS_CHANCE:
                 self.base_succes = SUCCESS_CHANCE[self.difficulty]
             else:
-                self.base_succes = int(self.difficulty)
+                try:
+                    self.base_succes = int(self.difficulty)
+                except:
+                    self.base_succes = SUCCESS_CHANCE['E']
+                    print(f'Something strange with difficulty in {self}.')                    
         else:
             self.base_succes = SUCCESS_CHANCE['E']
             print(f'No difficulty provided for {self}.')
@@ -555,14 +639,20 @@ class Option(EventComponent):
             progress_ID = self.outcomes[0].event_ID
             effect_string += PROGRESS_BASE.replace('progress_ID', str(progress_ID))
         
-        # Encounter effect for when an option has a success outcome.
-        if hasattr(self,'success'):
+        # Encounter effect for when an option has two outcomes. One of them
+        # should always be success or fail, but there might be cases where it
+        # only has one of the two.
+        if len(self.outcomes) == 2:
             # Check if there is a success event but no failure event. If so, try to find another
             # event outcome, and assign that as the failure event.
             if not hasattr(self,'failure'):
                 for event in self.outcomes:
                     if event.type != 'Success':
                         self.failure = event
+            if not hasattr(self,'success'):
+                for event in self.outcomes:
+                    if event.type != 'Failure':
+                        self.success = event
 
             effect_string += ENCOUNTER_EFFECT_BASE.replace('success_chance', str(self.base_succes))\
                                                   .replace('success_target', str(self.success.event_ID))\
